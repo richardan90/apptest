@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Test</string>
+    <string name="imagedesc">Description</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="rememberme">Remember me</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Send Push Notification</string>
+    <string name="timerscreen">Timer</string>
+    <string name="listviewscreen">ListView</string>
+    <string name="logoutscreen">Logout</string>
+
+    <!--Info Activity-->
+    <string name="info">Info</string>
+    <string name="title">Title: </string>
+    <string name="id">Id: </string>
+    <string name="userid">User Id: </string>
+    <string name="completed">Completed: </string>
+
+</resources>
