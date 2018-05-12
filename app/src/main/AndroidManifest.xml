@@ -11,6 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/hiapphere_com_micron"
         android:supportsRtl="true">
+
+        <service android:name=".utils.StickyService"/>
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">

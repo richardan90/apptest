@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import com.example.richardantonios.testapp.fragments.ListViewFragment;
 import com.example.richardantonios.testapp.fragments.TimerFragment;
 import com.example.richardantonios.testapp.utils.MyPreference;
+import com.example.richardantonios.testapp.utils.StickyService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +34,6 @@ import java.util.Date;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private boolean logout;
-    private boolean leaveapp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // this service is used to clear preferences when user kills the app by swiping it (left or right)
+        Intent stickyService = new Intent(this, StickyService.class);
+        startService(stickyService);
 
         // save a new login date only if the user has no previous login date and has selected the remember me checkbox
         if(MyPreference.getInstance(getApplicationContext()).getStringData("logged_in_date").equals(""))
@@ -172,7 +176,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         builder.setTitle("Are you sure you want to leave the App?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        leaveapp = true;
                         finish();
                     }
                 })
@@ -231,17 +234,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             MyPreference.getInstance(getApplicationContext()).saveIntData("minutes_elapsed", 0);
             MyPreference.getInstance(getApplicationContext()).saveIntData("seconds_elapsed", 0);
         }
-
-        if(leaveapp)
+        else if(!MyPreference.getInstance(getApplicationContext()).getBooleanData("logged_in"))
         {
-            if(!MyPreference.getInstance(getApplicationContext()).getBooleanData("logged_in"))
-            {
-                MyPreference.getInstance(getApplicationContext()).saveStringData("logged_in_date", "");
-                MyPreference.getInstance(getApplicationContext()).saveIntData("hours_elapsed", 0);
-                MyPreference.getInstance(getApplicationContext()).saveIntData("minutes_elapsed", 0);
-                MyPreference.getInstance(getApplicationContext()).saveIntData("seconds_elapsed", 0);
-            }
+            MyPreference.getInstance(getApplicationContext()).saveStringData("logged_in_date", "");
+            MyPreference.getInstance(getApplicationContext()).saveIntData("hours_elapsed", 0);
+            MyPreference.getInstance(getApplicationContext()).saveIntData("minutes_elapsed", 0);
+            MyPreference.getInstance(getApplicationContext()).saveIntData("seconds_elapsed", 0);
         }
+
         super.onDestroy();
     }
 }
