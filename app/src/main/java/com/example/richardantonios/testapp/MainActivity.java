@@ -214,9 +214,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .setContentTitle("Hello World!") // title for notification
                 .setContentText("This is a push notification.")// message for notification
                 .setAutoCancel(true); // clear notification after click
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        // Uncomment to enable action on notification click
+        /*Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(pi);
+        mBuilder.setContentIntent(pi);*/
         if(mNotificationManager != null)
             mNotificationManager.notify(0, mBuilder.build());
     }
